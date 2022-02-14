@@ -1,0 +1,6 @@
+@host = http://localhost:3001
+###
+GET {{host}}/
+
+### 
+GET {{host}}/add_version

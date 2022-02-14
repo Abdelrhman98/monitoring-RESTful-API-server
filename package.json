@@ -1,0 +1,23 @@
+{
+  "name": "mazad-mean",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon app",
+    "pm2": "cd start && pm2 start",
+    "kill": "npx kill-port 3001"
+  },
+  "dependencies": {
+    "axios": "^0.26.0",
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^15.0.0",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.9",
+    "morgan": "~1.9.1"
+  }
+}
