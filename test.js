@@ -20,19 +20,27 @@
 //   test()
 
 
-// const redis = require('./DB/connection/redisCredentials')
-// const RedisDB = require('./DB/connection/redis.con')
-// const redisCl = new RedisDB(redis.mailVerification)
+const redis = require('./DB/connection/redisCredentials')
+const RedisDB = require('./DB/connection/redis.con')
+const redisCl = new RedisDB(redis.mailVerification)
 
-// const test= async()=>{
-//     console.log(await redisCl.HGET("mail_verification"));    
-// }
-// test()
+const test= async()=>{
+    console.log(await redisCl.HSET("urlChecksAgg","www.test",JSON.stringify(
+        {
+            'no_requests':1,
+            'no_faild':1,
+            'no_success':1,
+            'upTime':450,
+            'downTime':450
+        }
+    )));    
+}
+test()
 
 // redisCl.stop()
 // console.log();
 
-var cron = require('node-cron');
-cron.schedule('* * * * *', () => {
-    console.log('running a task every minute');
-});
+// var cron = require('node-cron');
+// cron.schedule('* * * * *', () => {
+//     console.log('running a task every minute');
+// });

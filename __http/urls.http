@@ -6,13 +6,15 @@ Content-Type: application/json
 Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImEuc29saW1hbkBlZ3lwdHNtYXJ0Y2FyZHMuY29tIiwiX2lkIjoiNjIxMTQ2YWFhYWZmMzQ1MWFlMmUyMWU0IiwiaWF0IjoxNjQ1MzA0NTU0fQ.I_qeg8BMfLjUtNMNxkaqJ7jSb3fDRJIvmDYWIzsOrWI
 
 {
-    "name"  : "myApp",
+    "name"  : "hashem",
     "type"  : "GET",
-    "url"   : "jsonmock.hackerrank.com",
+    "url"   : "reqres.in",
     "protocol":"HTTPS",
-    "path":  "/api/moviesdata/search/?Title=spiderman",
+    "path":  "/api/users?page=2",
     "interval":1,
     "webhooks":{ "discord":"https://discord.com/api/webhooks/944244417391386677/gPUINLI_mdmQPi3LlHzSwks8jaHCd_dd_2IM6HNQ_EEyK6FHDCPg9taZadJoaSbaFsEy"}
 }
 
 ###
+GET https://reqres.in/api/users?page=2
+

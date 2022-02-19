@@ -2,7 +2,6 @@ const urlCheckerModel = require('../../DB/models/urlChecks.schema')
 const redis = require('../../DB/connection/redisCredentials')
 const RedisDB = require('../../DB/connection/redis.con')
 const redisCl = new RedisDB(redis.urlChecker)
-
 module.exports = 
 class urlChecker{
     constructor(configs={}){

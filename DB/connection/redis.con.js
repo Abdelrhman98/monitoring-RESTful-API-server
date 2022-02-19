@@ -22,7 +22,7 @@ class redisDB {
     }
 
     async setHash(hashname, hashData) {
-        return await this.hmset(hashname, hashData);
+        return await this.client.hmset(hashname, hashData);
     }
 
     async deleteKey(keyName) {
