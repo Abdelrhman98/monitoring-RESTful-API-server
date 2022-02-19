@@ -11,9 +11,6 @@ var userSchema = new mongoose.Schema({
         required:true,
         unique:true
     },
-    mobile:{
-        type:String
-    },
     password:{
         type:String,
         required:true,
@@ -21,12 +18,18 @@ var userSchema = new mongoose.Schema({
     accessToken:{
         type:String,
         default:""
+    },
+    isActive:{
+        type:Boolean,
+        default:false
     }
 },{ strict: false });
 // var User =
 userSchema.methods.comparePassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 };
-
+userSchema.methods.activateMail = function(){
+    this.isActive = true
+}
 //Export the model
 module.exports =  mongoose.model('user', userSchema);

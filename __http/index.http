@@ -1,0 +1,15 @@
+@host = http://localhost:3001
+###
+GET {{host}}/
+
+### 
+GET {{host}}/add_version
+
+
+###
+POST https://discord.com/api/webhooks/944244417391386677/gPUINLI_mdmQPi3LlHzSwks8jaHCd_dd_2IM6HNQ_EEyK6FHDCPg9taZadJoaSbaFsEy
+Content-Type: application/json
+
+{
+    "content":""
+}

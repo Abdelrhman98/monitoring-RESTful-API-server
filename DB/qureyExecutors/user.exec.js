@@ -11,20 +11,27 @@ async function checkUser( email ){
 async function addNewUser( userData ){
     const isFound =  await checkEmailUser(userData?.email)
     if(isFound){
-        return "email is found!"
+        return {isAdded:false, message:"email is found!"}
     }else{
         try{
             console.log(userData);
             const newUser = new user(userData, { strict: false })
-            return await newUser.save()
+            return {isAdded:true, data:await newUser.save()}
         }catch(err){
             console.log(err);
         }
     }
 }
 
+async function activateUser(userId){
+    const ver = await user.updateOne({_id:userId},{$set:{isActive:true}}).exec()
+    // await ver.activateMail()
+    return ver
+}
+
 module.exports = {
     checkEmailUser,
     checkUser,
-    addNewUser
+    addNewUser,
+    activateUser
 }

@@ -1,0 +1,30 @@
+@host = http://localhost:3001
+
+POST {{host}}/auth/login
+Content-Type: application/json
+
+{
+    "email":"a.soliman@egyptsmartcards.com",
+    "password":"pass123"
+}
+
+###
+
+POST {{host}}/auth/signup
+Content-Type: application/json
+
+{
+    "name"  :"Hahsem22",
+    "email" :"a.soliman@egyptsmartcards.com",
+    "password":"pass123"
+}
+
+###
+GET {{host}}/auth/test
+Content-Type: application/json
+Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImEuc29saW1hbkBlZ3lwdHNtYXJ0Y2FyZHMuY29tIiwiX2lkIjoiNjIwZmY1MTQ1MTgwZTczNDdmNWI0Y2Y1IiwiaWF0IjoxNjQ1MjEzMDEzfQ._kDZsurvtzL_dWpzUrjwISnPLQsYmUclOwVaazcYBuk
+
+
+###
+GET https://jsonmock.hackerrank.com/api/moviesdata/search/?Title=spiderman
+

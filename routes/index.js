@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const testSchema = require('../DB/models/test.schema')
-const version = require('../DB/models/version.schema')
+
 /* GET home page. */
 router.get('/', async function(req, res, next) {
   const x = testSchema({name:"asdasd"})

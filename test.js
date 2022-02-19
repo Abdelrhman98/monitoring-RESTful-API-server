@@ -1,31 +1,33 @@
+// const newTest =require('./DB/qureyExecutors/mailVerification.exec')
+// require('./DB/connection/mongoDB.con')
+// const test = 
+// async()=>{
+//     console.log(await newTest("620fabed04ae5a64b8748f4c"));
+// }
 
-const axios = require('axios')
-async function getMovieTitles(substr) {
-    const url = "https://jsonmock.hackerrank.com/api/moviesdata/search/?Title="+substr
-    let totalPages=1
-    allData= []
-    axios.get(url).then((data)=>{
-        totalPages=data.data.total_pages
-        data.data.data.forEach(element => {
-            allData.push(element.Title)
-        });
-        
-        if(totalPages>1){
-            for(let i=2;i<=totalPages;i++){
-                let urlPage = `${url}&page=${i}`
-                axios.get(urlPage).then((data)=>{
-                    data.data.data.forEach(element => {
-                        allData.push(element.title)
-                    });
-                })
-            }
-        }
-        
-        allData.sort((a, b)=>{
-            return a.localeCompare(b)
-        })
-        console.log(allData);
-    })
+// test()
+// const { createClient } = require('redis')
+
+// const test = async () => {
+//     const client = createClient();
+//     client.on('error', (err) => console.log('Redis Client Error', err));
+//     await client.connect();
+//     await client.HSET('testNewTTL', 'working2','EXXXXXXXxx2');
+//     const value = await client.HGETALL('testNewTTL');
+//     console.log(value);
+//   };
+
+//   test()
+
+
+const redis = require('./DB/connection/redisCredentials')
+const RedisDB = require('./DB/connection/redis.con')
+const redisCl = new RedisDB(redis.mailVerification)
+
+const test= async()=>{
+    console.log(await redisCl.HGET("mail_verification"));    
 }
+test()
 
-getMovieTitles("spiderman")
+// redisCl.stop()
+// console.log();
