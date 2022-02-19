@@ -1,14 +1,18 @@
 @host = http://localhost:3001/url
 
-
+ #https://jsonmock.hackerrank.com/api/moviesdata/search/?Title=spiderman
 POST {{host}}/register
 Content-Type: application/json
-Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImEuc29saW1hbkBlZ3lwdHNtYXJ0Y2FyZHMuY29tIiwiX2lkIjoiNjIxMTAwYzM1MTgwZTczNDdmNWI0Y2ZiIiwiaWF0IjoxNjQ1Mjg0NzkyfQ.pF7uBBJt7kEd1JhMQ-60h9-J2xGzdMA150pkJmGQ8aE
+Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImEuc29saW1hbkBlZ3lwdHNtYXJ0Y2FyZHMuY29tIiwiX2lkIjoiNjIxMTQ2YWFhYWZmMzQ1MWFlMmUyMWU0IiwiaWF0IjoxNjQ1MzA0NTU0fQ.I_qeg8BMfLjUtNMNxkaqJ7jSb3fDRJIvmDYWIzsOrWI
 
 {
     "name"  : "myApp",
-    "url"   : "localhost.com",
-    "path":  "auth/add",
-    "port": 3001,
+    "type"  : "GET",
+    "url"   : "jsonmock.hackerrank.com",
+    "protocol":"HTTPS",
+    "path":  "/api/moviesdata/search/?Title=spiderman",
+    "interval":1,
     "webhooks":{ "discord":"https://discord.com/api/webhooks/944244417391386677/gPUINLI_mdmQPi3LlHzSwks8jaHCd_dd_2IM6HNQ_EEyK6FHDCPg9taZadJoaSbaFsEy"}
 }
+
+###

@@ -2,7 +2,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const { addNewUser } = require("../../DB/qureyExecutors/user.exec");
-
 const mailVerification = require("./mailVerification.controller");
 
 async function auth_signUp(userData) {
@@ -18,7 +17,6 @@ async function auth_signUp(userData) {
 }
 async function auth_verifyMail(hash) {
     const mailVer = new mailVerification();
-    
     return await mailVer.verifyMail(hash)
 }
 

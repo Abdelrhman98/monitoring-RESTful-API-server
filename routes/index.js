@@ -14,5 +14,9 @@ router.get('/add_version', async (req, res, next)=>{
   const x = version({versionFor:"seriveRepo", version:(12.10).toFixed(2)})
   const result = await x.save()
   res.send(result)
-})  
+})
+
+router.get('/test_monitpor',(req, res,next)=>{
+  res.send("done")
+})
 module.exports = router;

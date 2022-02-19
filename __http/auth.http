@@ -14,8 +14,8 @@ POST {{host}}/auth/signup
 Content-Type: application/json
 
 {
-    "name"  :"Hahsem22",
-    "email" :"a.soliman@egyptsmartcards.com",
+    "name"  :"shaker",
+    "email" :"test.soliman@egyptsmartcards.com",
     "password":"pass123"
 }
 

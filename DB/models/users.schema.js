@@ -32,4 +32,4 @@ userSchema.methods.activateMail = function(){
     this.isActive = true
 }
 //Export the model
-module.exports =  mongoose.model('user', userSchema);
+module.exports =  mongoose.model('newUser', userSchema);

@@ -1,6 +1,6 @@
 const axios =  require('axios') 
 
-const url = 'https://jsonmock.hackerrank.com/api/moviesdata/search/?Title=spiderman'
+const url = 'http://localhost:3001/test_monitpor'
 
 const instance = axios.create()
 
@@ -16,9 +16,21 @@ instance.interceptors.response.use((response) => {
     response.headers['request-duration'] = milliseconds
     return response
 })
-
-instance.get(url).then((response) => {
-    console.log(response.headers['request-duration'])
-}).catch((error) => {
-    console.error(`Error`)
-})
+async function lol (){
+    var start = performance.now()
+    var test=await 
+    instance.get(url).then((response) => {
+        test = response.headers['request-duration']
+        console.log(response.headers['request-duration'])
+        return response.headers['request-duration']
+    }).catch((error) => {
+        console.error(`Error`)
+    
+    })
+    var end = performance.now();
+    
+    
+    console.log(`Execution time: ${end - start} ms ${test}`);
+    
+}
+lol()

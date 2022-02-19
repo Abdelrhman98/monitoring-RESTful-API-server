@@ -1,4 +1,4 @@
-const res = require('express/lib/response');
+
 const {checkEmailUser} = require('../../DB/qureyExecutors/user.exec')
 const jwt = require("jsonwebtoken");
 // const { verify } = require('crypto');

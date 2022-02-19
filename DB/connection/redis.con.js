@@ -17,7 +17,8 @@ class redisDB {
     }
 
     async getAllHash(hashname) {
-        return await this.hgetall(hashname);
+        
+        return await this.client.hGetAll(hashname);
     }
 
     async setHash(hashname, hashData) {
@@ -72,6 +73,14 @@ class redisDB {
         }
     }
 
+    HMSET(hashName, key, val){
+        try{
+            this.client.HMSET(hashName, key, val)
+        }catch(err){
+            return err 
+        }
+    }
+
     async HGET(hashname, key=""){
         if(key.length){
             return await this.client.hGet(hashname,key)
@@ -82,6 +91,8 @@ class redisDB {
     async HDEL(hashName, key){
         return await this.client.HDEL(hashName,key)
     }
+
+    
     stop() {
         this.client.quit();
     }

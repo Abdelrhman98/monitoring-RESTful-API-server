@@ -26,9 +26,6 @@ var urlCheck = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    port: {
-        type: Number,
-    },
     sendConfigs: {
         type: Object,
     },
@@ -37,8 +34,7 @@ var urlCheck = new mongoose.Schema({
         default: 5,
     },
     interval: {
-        type: Number,
-        default: 10,
+        type: String
     },
     threshold: {
         type: Number,
@@ -62,6 +58,7 @@ var urlCheck = new mongoose.Schema({
     },
     currentStatus: {
         type: Boolean,
+        default:true
     },
     allChecks:{
         type:[checksSchema],
