@@ -4,18 +4,17 @@ POST {{host}}/auth/login
 Content-Type: application/json
 
 {
-    "email":"abdelrhman.soleman98@gmail.com",
+    "email":"m.gaber@egyptsmartcards.com",
     "password":"pass123"
 }
 
 ###
-
 POST {{host}}/auth/signup
 Content-Type: application/json
 
 {
-    "name"  :"hashem",
-    "email" :"abdelrhman.soleman98@gmail.com",
+    "name"  :"moOOOO",
+    "email" :"m.gaber@egyptsmartcards.com",
     "password":"pass123"
 }
 

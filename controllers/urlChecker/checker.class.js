@@ -25,7 +25,8 @@ instance.interceptors.response.use((response) => {
 module.exports = class checker{
     constructor(oneChecker){
         this.aggHashName = "urlChecksAgg"
-        this.checkerConfigs = JSON.parse(oneChecker)
+        this.allReqHashName = "urlChecksReq"
+        this.checkerConfigs = (typeof oneChecker ==='object')?oneChecker:JSON.parse(oneChecker)
         this.totalFailed = 0
         console.log(this.checkerConfigs.threshold);
     }
@@ -82,22 +83,36 @@ module.exports = class checker{
     async __getCheckerAggObject(){
         return await redisCl.HGET(this.aggHashName, this.checkerConfigs.url)
     }
+
+    async __getCheckerReqObject(){
+        return await redisCl.HGET(this.allReqHashName, this.checkerConfigs.url)
+    }
+
     async __applyLogic(reqest){
         let checkerAGG = JSON.parse(await this.__getCheckerAggObject())
+        let checkerReqs = JSON.parse(await this.__getCheckerReqObject())
         checkerAGG['no_requests'] += 1
         if(reqest.result){
             checkerAGG['no_success']+=1
             checkerAGG['upTime']+=reqest.totalTime
-            
+
+            checkerReqs['status'] = true
+            checkerReqs["successRequests"].push({"resquestTime":reqest.totalTime,"time": new Date().toISOString()})
         }else{
             checkerAGG['no_faild']+=1
             checkerAGG['downTime']+=reqest.totalTime
+
+            checkerReqs['status'] = false
+            checkerReqs["faildRequests"].push({"resquestTime":reqest.totalTime,"time": new Date().toISOString()})
             if(checkerAGG['no_faild'] == this.checkerConfigs.threshold){
                 this.__notifyForErr(checkerAGG)
             }
         }
         redisCl.HDEL(this.aggHashName, this.checkerConfigs.url)
         redisCl.HSET(this.aggHashName, this.checkerConfigs.url, JSON.stringify(checkerAGG))
+
+        redisCl.HDEL(this.allReqHashName, this.checkerConfigs.url)
+        redisCl.HSET(this.allReqHashName, this.checkerConfigs.url, JSON.stringify(checkerReqs))
         // this.__notifyForErr(checkerAGG)
         console.log(checkerAGG);
     }
@@ -123,7 +138,36 @@ module.exports = class checker{
             `
         })
     }
+
     __sendDiscord(notifyObject){
         axios.post(this.checkerConfigs.sendConfigs.discord,{'content':JSON.stringify(notifyObject)})
+    }
+
+    async redisNewChecker(){
+        let aggAdded = await this.putDefaultObjectInRedisAgg(),
+        reqAdded = await this.putDefaultObjectInRedisReqs()
+        return (aggAdded && reqAdded)
+    }
+
+    async putDefaultObjectInRedisAgg(){
+        let defaultAgg = {
+            "no_requests":0,
+            "no_success":0,
+            "no_faild":0,
+            "upTime":0,
+            "downTime":0
+        }
+        // console.log(this.checkerConfigs)
+        return await redisCl.HSET(this.aggHashName, this.checkerConfigs.url, JSON.stringify(defaultAgg))
+    }
+
+    async putDefaultObjectInRedisReqs(){
+        // {"resquestTime":0,"time":"now"}
+        let defaultReq = {
+            "status":true,
+            "successRequests":[],
+            "faildRequests":[]
+        }
+        return await redisCl.HSET(this.allReqHashName, this.checkerConfigs.url, JSON.stringify(defaultReq))
     }
 }

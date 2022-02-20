@@ -32,7 +32,7 @@ class urlChecker{
         if(newDoc){
             this.__addToRedis(newDoc)
             console.log("added new checker to mongo",newDoc);
-            return true
+            return newDoc
         }
         return false
     }

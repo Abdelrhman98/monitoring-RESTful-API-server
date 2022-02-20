@@ -1,16 +1,17 @@
 @host = http://localhost:3001/url
 
+
  #https://jsonmock.hackerrank.com/api/moviesdata/search/?Title=spiderman
 POST {{host}}/register
 Content-Type: application/json
-Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImEuc29saW1hbkBlZ3lwdHNtYXJ0Y2FyZHMuY29tIiwiX2lkIjoiNjIxMTQ2YWFhYWZmMzQ1MWFlMmUyMWU0IiwiaWF0IjoxNjQ1MzA0NTU0fQ.I_qeg8BMfLjUtNMNxkaqJ7jSb3fDRJIvmDYWIzsOrWI
+Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0uZ2FiZXJAZWd5cHRzbWFydGNhcmRzLmNvbSIsIl9pZCI6IjYyMTIxNTY0NjRhMzM4YzQwMmVkYzJjOCIsImlhdCI6MTY0NTM1MjMzOX0.jan8zRwVlFC8Oz-TSHLvy7-k3maNSv6kepl3auDlikg
 
 {
-    "name"  : "hashem",
+    "name"  : "moooAPP",
     "type"  : "GET",
     "url"   : "reqres.in",
     "protocol":"HTTPS",
-    "path":  "/api/users?page=2",
+    "path":  "/users?page=1",
     "interval":1,
     "webhooks":{ "discord":"https://discord.com/api/webhooks/944244417391386677/gPUINLI_mdmQPi3LlHzSwks8jaHCd_dd_2IM6HNQ_EEyK6FHDCPg9taZadJoaSbaFsEy"}
 }
@@ -18,3 +19,5 @@ Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImEuc29saW1h
 ###
 GET https://reqres.in/api/users?page=2
 
+###
+GET https://jsonmock.hackerrank.com/api/moviesdata/search/?Title=spiderman

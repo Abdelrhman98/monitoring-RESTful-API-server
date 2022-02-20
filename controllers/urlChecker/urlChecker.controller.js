@@ -20,8 +20,14 @@ async function loadAllCheckers(){
     
     return true
 }
+async function registerNewChecker( checkerConfigs ){
+    let newChecker = new checker(checkerConfigs)
+    await newChecker.redisNewChecker()
+    newChecker._run()
+}
 
 module.exports = {
     createNewChecker,
-    loadAllCheckers
+    loadAllCheckers,
+    registerNewChecker
 }
