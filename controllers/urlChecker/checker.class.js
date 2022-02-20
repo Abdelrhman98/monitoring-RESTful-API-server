@@ -5,7 +5,7 @@ const instance = axios.create()
 const redis = require('../../DB/connection/redisCredentials')
 const RedisDB = require('../../DB/connection/redis.con')
 const redisCl = new RedisDB(redis.urlRequestsAgg)
-
+var json2html = require('json2html')
 const sendMail = require('../mailer/mail_main.controller')
 
 
@@ -125,6 +125,12 @@ module.exports = class checker{
         }
     }
 
+    __notifyReport( notifyObject ){
+        if(this.checkerConfigs.sendConfigs.email){
+            this.__sendMail(notifyObject)
+        }
+    }
+
     __sendMail(notifyObject){
         sendMail({
             to:this.checkerConfigs.sendConfigs.email,
@@ -132,9 +138,7 @@ module.exports = class checker{
             html:`
             <h1>result of monitoring</h1>
             <br>
-            <pre>
-            ${JSON.stringify(notifyObject)}
-            </pre>
+            ${json2html.render(notifyObject)}
             `
         })
     }
@@ -169,5 +173,20 @@ module.exports = class checker{
             "faildRequests":[]
         }
         return await redisCl.HSET(this.allReqHashName, this.checkerConfigs.url, JSON.stringify(defaultReq))
+    }
+
+    async generateReport(){
+        // console.log(this.checkerConfigs)
+        let reportResult = {}
+        let checkerAGG = JSON.parse(await this.__getCheckerAggObject())
+        let checkerReqs = JSON.parse(await this.__getCheckerReqObject())
+        reportResult['status'] = checkerReqs['status'],
+        reportResult['availability'] = `${ ((checkerAGG['no_success']/checkerAGG['no_requests'])*100).toFixed(2)} %`
+        reportResult['outages'] = checkerAGG['no_faild']
+        reportResult['downtime'] = checkerAGG['downTime']
+        reportResult['uptime'] = checkerAGG['upTime']
+        reportResult['responseTime'] = `${((checkerAGG['upTime']/1000)/checkerAGG['no_requests']).toFixed(2)} S`
+        reportResult['history'] = {"successRequests":checkerReqs['successRequests'], "faildRequests":checkerReqs['faildRequests']}
+        return reportResult
     }
 }

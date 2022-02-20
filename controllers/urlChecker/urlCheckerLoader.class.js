@@ -1,7 +1,7 @@
 const redis = require('../../DB/connection/redisCredentials')
 const RedisDB = require('../../DB/connection/redis.con')
 const redisCl = new RedisDB(redis.urlRequests)
-
+const urlChecksModel = require('../../DB/models/urlChecks.schema')
 module.exports = 
 class urlCheckerLoader{
     constructor(){
@@ -26,4 +26,7 @@ class urlCheckerLoader{
         return await this.loadAllUlrs()
     }
 
+    async getCheckerByName( appName ){
+        return await urlChecksModel.findOne({name:appName}).exec()
+    }
 }

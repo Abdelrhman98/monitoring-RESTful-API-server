@@ -3,7 +3,7 @@ var router = express.Router();
 
 const isAuth = require('../middlewares/auth.middleware')
 const Validator = require('../middlewares/validator.middleware')
-const {createNewChecker, registerNewChecker} =require('../controllers/urlChecker/urlChecker.controller')
+const {createNewChecker, registerNewChecker, getAppReport} =require('../controllers/urlChecker/urlChecker.controller')
 
 router.post('/register',isAuth,Validator('urlChecker'),async(req, res,next)=>{
     if(req.user){
@@ -17,4 +17,10 @@ router.post('/register',isAuth,Validator('urlChecker'),async(req, res,next)=>{
     }
 })
 
+
+router.get('/getChecker/:app', async (req, res,next)=>{
+    let appConf = await getAppReport(req.params.app)
+    
+    res.send(appConf)
+})
 module.exports = router;

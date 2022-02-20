@@ -20,14 +20,31 @@ async function loadAllCheckers(){
     
     return true
 }
+
 async function registerNewChecker( checkerConfigs ){
     let newChecker = new checker(checkerConfigs)
     await newChecker.redisNewChecker()
     newChecker._run()
 }
 
+async function getAppReport( appName ){
+    const loader = new urlCheckLoader()
+    let checkerConf =  await loader.getCheckerByName(appName)
+    if(checkerConf){
+        let checkerReport = new checker( checkerConf )
+        let report = await checkerReport.generateReport()
+        checkerReport.__notifyReport(report)
+        // console.log(report)
+        
+        return report
+    }
+    return false
+}
+
 module.exports = {
     createNewChecker,
     loadAllCheckers,
-    registerNewChecker
+    registerNewChecker,
+    getAppReport,
+    
 }
